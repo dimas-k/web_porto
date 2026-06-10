@@ -12,7 +12,6 @@ import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
-// Variants untuk stagger animation dengan type yang benar
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -31,7 +30,7 @@ const itemVariants: Variants = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: "easeOut"
+      ease: 'easeOut'
     }
   }
 }
@@ -40,48 +39,62 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false)
   const [mounted, setMounted] = useState(false)
 
+  // Load saved preference or system preference on mount
   useEffect(() => {
-    setMounted(true)
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    const saved = localStorage.getItem('darkMode')
+    if (saved !== null) {
+      setDarkMode(saved === 'true')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setDarkMode(true)
     }
+    setMounted(true)
   }, [])
+
+  // Apply dark class to <html> and persist to localStorage
+  useEffect(() => {
+    if (!mounted) return
+    if (darkMode) {
+      document.documentElement.classList.add('dark')
+      localStorage.setItem('darkMode', 'true')
+    } else {
+      document.documentElement.classList.remove('dark')
+      localStorage.setItem('darkMode', 'false')
+    }
+  }, [darkMode, mounted])
 
   if (!mounted) return null
 
   return (
-    <div className={`${darkMode ? 'dark' : ''}`}>
-      <div className="dark:bg-gray-900 bg-gray-50 transition-colors duration-300">
-        <ParticleBackground darkMode={darkMode} />
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10"
-        >
-          <motion.div variants={itemVariants}>
-            <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <Hero />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <About />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <Projects />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <Skills />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <Contact />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <Footer />
-          </motion.div>
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
+      <ParticleBackground darkMode={darkMode} />
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10"
+      >
+        <motion.div variants={itemVariants}>
+          <Header darkMode={darkMode} setDarkMode={setDarkMode} />
         </motion.div>
-      </div>
+        <motion.div variants={itemVariants}>
+          <Hero />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <About />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <Projects />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <Skills />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <Contact />
+        </motion.div>
+        <motion.div variants={itemVariants}>
+          <Footer />
+        </motion.div>
+      </motion.div>
     </div>
   )
 }

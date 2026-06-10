@@ -41,12 +41,12 @@ const About = () => {
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">About Me</h2>
                     <div className="w-20 h-1 bg-purple-600 mx-auto mb-6"></div>
                     <p className="text-lg text-gray-600 dark:text-gray-300 max-w-7xl mx-auto">
-                        A highly motivated Fullstack Developer in the 7th semester of a D4 Software Engineering program,
-                        with practical experience in building scalable web and mobile applications using Laravel, Flutter,
-                        MySQL, PostgreSQL, and modern front-end frameworks such as Bootstrap, and Tailwind CSS. Skilled in developing and integrating RESTful APIs, collaborating in agile teams, and
-                        delivering end-to-end solutions through academic, internship, and independent projects. Eager to
-                        contribute to impactful digital products while continuously advancing technical expertise in backend
-                        development and AI integration.
+                        A Final-year Software Engineering student (8th Semester, GPA: 3.90) at Politeknik Negeri Indramayu,
+                        with strong interests in Full Stack Development, Artificial Intelligence, and Intelligent Systems.
+                        Experienced in building scalable web and mobile applications using Laravel, Flutter, PostgreSQL, and RESTful APIs.
+                        Currently conducting thesis research on rice disease classification using Deep Learning (Swin Transformer, ViT, EfficientNet),
+                        IoT sensor integration, and LLM-based automated recommendation systems. Passionate about crafting real solutions
+                        that have impact through clean code, continuous learning, and AI-driven applications.
                     </p>
                 </motion.div>
 

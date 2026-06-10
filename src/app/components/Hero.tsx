@@ -64,7 +64,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="text-lg md:text-xl mb-10 max-w-2xl text-gray-600 dark:text-gray-400 mx-auto lg:mx-0"
             >
-              I create exceptional digital experiences with a focus on performance, accessibility, and engaging design.
+              I create scalable web and mobile applications, AI-driven systems, and deep learning solutions with a focus on real-world impact.
             </motion.p>
             
             <motion.div
