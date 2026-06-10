@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dimas Arya's Portofolio",
+  title: "Dimas Arya Ramadhan Setiawan's Portofolio",
   description: "Porto",
 };
 
