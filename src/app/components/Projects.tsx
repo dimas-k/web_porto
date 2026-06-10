@@ -191,6 +191,7 @@ const Projects = () => {
                 'FastAPI backend for model inference and LLM orchestration',
                 'End-to-end pipeline: image capture → IoT fusion → classification → recommendation',
                 'Comparative analysis of model performance across 4 rice disease datasets'
+                
             ],
             date: 'Feb 2026 - Present',
             role: 'Researcher & Fullstack Developer',
