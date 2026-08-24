@@ -40,7 +40,7 @@ const Projects = () => {
                 'Responsive design across all devices',
                 'Real-time admin dashboard for monitoring and management'
             ],
-            date: 'Sep 2023 - Sep 2024',
+            date: 'Sep 2023 - Present',
             role: 'Full Stack Developer & Project Manager',
             teamSize: '4 people (2 developers, 2 designers, 1 PM)',
             challenges: [
@@ -70,7 +70,7 @@ const Projects = () => {
                 'Admin validation before publishing',
                 'Export data to Excel for reporting'
             ],
-            date: 'Okt 2024 - Mar 2025',
+            date: 'Okt 2024 - Present',
             role: 'Full Stack Developer',
             teamSize: '3 People (3 developers, 1 PM)',
             challenges: [
@@ -193,7 +193,7 @@ const Projects = () => {
                 'Comparative analysis of model performance across 4 rice disease datasets'
                 
             ],
-            date: 'Feb 2026 - Present',
+            date: 'Feb 2026 - Jul 2026',
             role: 'Researcher & Fullstack Developer',
             teamSize: '1 Person (Thesis Research)',
             challenges: [

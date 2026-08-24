@@ -41,12 +41,8 @@ const About = () => {
                     <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">About Me</h2>
                     <div className="w-20 h-1 bg-purple-600 mx-auto mb-6"></div>
                     <p className="text-lg text-gray-600 dark:text-gray-300 max-w-7xl mx-auto">
-                        A Final-year Software Engineering student (8th Semester, GPA: 3.89) at Politeknik Negeri Indramayu,
-                        with strong interests in Full Stack Development, Artificial Intelligence, and Intelligent Systems.
-                        Experienced in building scalable web and mobile applications using Laravel, Flutter, PostgreSQL, and RESTful APIs.
-                        Currently conducting thesis research on rice disease classification using Deep Learning (Swin Transformer, ViT, EfficientNet),
-                        IoT sensor integration, and LLM-based automated recommendation systems. Passionate about crafting real solutions
-                        that have impact through clean code, continuous learning, and AI-driven applications.
+                        A Bachelor of Applied Science in Software Engineering graduate from Politeknik Negeri Indramayu, with strong interests in Full Stack Development, Artificial Intelligence, and Intelligent Systems. Experienced in building scalable web and mobile applications using Laravel, Flutter, PostgreSQL, and RESTful APIs. Completed thesis research on rice disease classification using Deep Learning (Swin Transformer, ViT, EfficientNet), IoT sensor integration, and LLM-based automated recommendation systems. Passionate about crafting real solutions that have impact through clean code, continuous learning, and AI-driven applications.
+
                     </p>
                 </motion.div>
 
