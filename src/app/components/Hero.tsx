@@ -73,7 +73,6 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-14"
             >
-              
               <button
                 onClick={() => window.open('/file/Dimas_Arya_Ramadhan_Setiawan.pdf', '_blank')}
                 className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
