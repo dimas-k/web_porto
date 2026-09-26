@@ -2,124 +2,93 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaArrowDown, FaInstagram } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaInstagram, FaArrowRight } from 'react-icons/fa'
 import Image from 'next/image'
+import ScrambleText from './ScrambleText'
 
 const Hero = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden py-12">
-      <div className="container mx-auto px-4 z-10 flex items-center justify-center">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
-          {/* Foto Profile - Bulat */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="order-2 lg:order-1 flex-shrink-0"
-          >
-            <div className="relative">
-              <div className="w-56 h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl mx-auto">
-                <Image
-                  src="/images/gambar-dimas.jpg" // Ganti dengan path foto kamu
-                  alt="John Doe"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover"
-                  priority
-                />
-              </div>
-              {/* Efek gradient circle */}
-              {/* <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 animate-pulse"></div> */}
-            </div>
-          </motion.div>
-
-          {/* Teks Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center lg:text-left order-1 lg:order-2 max-w-2xl"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">
-              Dimas Arya Ramadhan Setiawan
-            </h1>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl mb-6 text-gray-700 dark:text-gray-300"
-            >
-              Full Stack Developer & Machine Learning Enthusiast
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg md:text-xl mb-10 max-w-2xl text-gray-600 dark:text-gray-400 mx-auto lg:mx-0"
-            >
-              I create scalable web and mobile applications, AI-driven systems, and deep learning solutions with a focus on real-world impact.
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-14"
-            >
-              <button
-                onClick={() => window.open('/file/Dimas_Arya_Ramadhan_Setiawan.pdf', '_blank')}
-                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              >
-                CV
-              </button>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="px-8 py-3 border-2 border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400 rounded-full font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300"
-              >
-                Contact Me
-              </button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex justify-center lg:justify-start space-x-6 text-2xl"
-            >
-              <a href="https://github.com/dimas-k" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                <FaGithub />
-              </a>
-              <a href="https://www.linkedin.com/in/dimas-arya-ramadhan-setiawan-4544362aa/" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                <FaLinkedin />
-              </a>
-              <a href="https://www.instagram.com/dimasarya880/" className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                <FaInstagram />
-              </a>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        <motion.div
+    <section id="home" className="pt-32 pb-0 relative overflow-hidden">
+      <div className="absolute inset-0 field-grid pointer-events-none" />
+      <div className="px-6 md:px-10 relative">
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          transition={{ duration: 0.5 }}
+          className="font-[family-name:var(--font-mono)] text-ink-dim text-sm mb-6"
         >
-          <button
-            onClick={() => scrollToSection('about')}
-            className="animate-bounce p-2 rounded-full border-2 border-gray-400 dark:border-gray-600 text-gray-400 dark:text-gray-600"
+          <span className="text-lime">$</span> who am i —{' '}
+          <span className="text-ink">Dimas Arya Ramadhan Setiawan</span>
+        </motion.p>
+
+        <h1 className="font-[family-name:var(--font-mono)] font-bold text-ink text-[10vw] md:text-[6.5vw] leading-[1.05] tracking-tight mb-10 min-h-[2.3em] md:min-h-[1.2em]">
+          <ScrambleText
+            words={['SOFTWARE_ENGINEER', 'ML/AI_ENGINEER', 'DIMAS ARYA RAMADHAN SETIAWAN']}
+            speed={28}
+            holdMs={650}
+          />
+        </h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end pb-10">
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg md:text-xl text-ink-dim max-w-xl"
           >
-            <FaArrowDown />
-          </button>
-        </motion.div>
+            Full-stack developer and applied deep learning researcher. Latest work: fusing computer vision
+            with live IoT sensor data to classify rice leaf disease.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex items-center gap-4"
+          >
+            <button
+              onClick={() => window.open('/file/Dimas_Arya_Ramadhan_Setiawan.pdf', '_blank')}
+              className="px-6 py-3 bg-lime text-bg font-[family-name:var(--font-display)] font-semibold flex items-center gap-2 hover:bg-ink transition-colors"
+            >
+              Download CV <FaArrowRight />
+            </button>
+            <div className="flex items-center gap-4 text-xl text-ink-dim">
+              <a href="https://github.com/dimas-k" aria-label="GitHub" className="hover:text-lime transition-colors"><FaGithub /></a>
+              <a href="https://www.linkedin.com/in/dimas-arya-ramadhan-setiawan-4544362aa/" aria-label="LinkedIn" className="hover:text-lime transition-colors"><FaLinkedin /></a>
+              <a href="https://www.instagram.com/dimasarya880/" aria-label="Instagram" className="hover:text-lime transition-colors"><FaInstagram /></a>
+            </div>
+          </motion.div>
+        </div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.3 }}
+        className="grid grid-cols-2 md:grid-cols-4 border-t border-line"
+      >
+        <div className="relative h-56 md:h-72 bg-bg-panel border-r border-line overflow-hidden col-span-2 md:col-span-1">
+          <Image
+            src="/images/gambar-dimas.jpg"
+            alt="Dimas Arya Ramadhan Setiawan"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+        <div className="p-6 md:p-8 bg-moss border-r border-line flex flex-col justify-between">
+          <span className="text-ink/70 text-sm">GPA</span>
+          <span className="font-[family-name:var(--font-display)] font-bold text-4xl md:text-5xl text-ink">3.89</span>
+        </div>
+        <div className="p-6 md:p-8 bg-bg-panel border-r border-line flex flex-col justify-between">
+          <span className="text-ink-dim text-sm">Shipped projects</span>
+          <span className="font-[family-name:var(--font-display)] font-bold text-4xl md:text-5xl text-lime">6+</span>
+        </div>
+        <div className="p-6 md:p-8 bg-clay flex flex-col justify-between">
+          <span className="text-bg/70 text-sm">DL models compared</span>
+          <span className="font-[family-name:var(--font-display)] font-bold text-4xl md:text-5xl text-bg">5</span>
+        </div>
+      </motion.div>
     </section>
   )
 }

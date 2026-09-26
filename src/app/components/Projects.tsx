@@ -191,7 +191,6 @@ const Projects = () => {
                 'FastAPI backend for model inference and LLM orchestration',
                 'End-to-end pipeline: image capture → IoT fusion → classification → recommendation',
                 'Comparative analysis of model performance across 4 rice disease datasets'
-                
             ],
             date: 'Feb 2026 - Jul 2026',
             role: 'Researcher & Fullstack Developer',
@@ -209,146 +208,110 @@ const Projects = () => {
         }
     ]
 
+
     return (
         <>
-            <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-900">
-                <div className="container mx-auto px-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-16"
-                    >
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 dark:text-white">My Projects</h2>
-                        <div className="w-20 h-1 bg-purple-600 mx-auto mb-6"></div>
-                        <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                            Here are the projects I have worked on. Click on a project to see the full details.
-                        </p>
-                    </motion.div>
+            <section id="projects" className="border-t border-line">
+                <div className="p-6 md:p-10 border-b border-line flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+                    <h2 className="font-[family-name:var(--font-display)] font-bold text-4xl md:text-5xl text-ink">
+                        Projects<span className="text-lime">.</span>
+                    </h2>
+                    <p className="text-ink-dim max-w-sm">Tap any project for the full write-up — role, features, and the challenges I ran into.</p>
+                </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {projects.map((project, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer group"
-                                onClick={() => setSelectedProject(project)}
-                            >
-                                <div className="h-60 bg-gray-200 dark:bg-gray-700 overflow-hidden relative">
-                                    <Image
-                                        src={project.image}
-                                        alt={project.title}
-                                        width={400}
-                                        height={250}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                    />
+                <div className="grid grid-cols-1 md:grid-cols-2">
+                    {projects.map((project, index) => (
+                        <motion.button
+                            key={index}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.3) }}
+                            viewport={{ once: true }}
+                            onClick={() => setSelectedProject(project)}
+                            className="relative text-left h-72 md:h-80 border-b border-r border-line overflow-hidden group"
+                        >
+                            <Image
+                                src={project.image}
+                                alt={project.title}
+                                fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-transparent" />
+                            <div className="absolute bottom-0 left-0 right-0 p-6">
+                                <span className="text-lime text-sm font-[family-name:var(--font-mono)]">{project.date}</span>
+                                <h3 className="font-[family-name:var(--font-display)] font-semibold text-xl text-ink mt-1 mb-2">
+                                    {project.title}
+                                </h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {project.technologies.slice(0, 3).map((tech, techIndex) => (
+                                        <span key={techIndex} className="px-2.5 py-1 text-xs font-[family-name:var(--font-mono)] border border-ink/25 text-ink/80">
+                                            {tech}
+                                        </span>
+                                    ))}
                                 </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                                        {project.title}
-                                    </h3>
-                                    <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">{project.description}</p>
-
-                                    <div className="flex flex-wrap gap-2">
-                                        {project.technologies.slice(0, 3).map((tech, techIndex) => (
-                                            <span
-                                                key={techIndex}
-                                                className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100 text-sm rounded-full"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
-                                        {project.technologies.length > 3 && (
-                                            <span className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm rounded-full">
-                                                +{project.technologies.length - 3} more
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.5 }}
-                        viewport={{ once: true }}
-                        className="text-center mt-12"
-                    >
-                        <p className="text-gray-600 dark:text-gray-300">
-                            Click on the project to see the full details and technologies used.
-                        </p>
-                    </motion.div>
+                            </div>
+                        </motion.button>
+                    ))}
                 </div>
             </section>
 
             {/* Modal Detail Project */}
             {selectedProject && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                <div className="fixed inset-0 bg-bg/80 z-50 flex items-center justify-center p-4">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        className="bg-white dark:bg-gray-800 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-bg-panel border border-line max-w-4xl w-full max-h-[90vh] overflow-y-auto"
                     >
-                        <div className="relative">
-                            <div className=" bg-gray-200 dark:bg-gray-700">
-                                <Image
-                                    src={selectedProject.image}
-                                    alt={selectedProject.title}
-                                    width={800}
-                                    height={400}
-                                    className="w-full h-full object-cover"
-                                />
-
-                            </div>
-
+                        <div className="relative h-64 md:h-80">
+                            <Image
+                                src={selectedProject.image}
+                                alt={selectedProject.title}
+                                fill
+                                className="object-cover"
+                            />
                             <button
                                 onClick={() => setSelectedProject(null)}
-                                className="absolute top-4 right-4 p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                className="absolute top-4 right-4 p-2 bg-bg border border-line hover:border-lime hover:text-lime transition-colors"
                             >
-                                <FaTimes className="text-gray-600 dark:text-gray-300" />
+                                <FaTimes className="text-ink" />
                             </button>
                         </div>
 
-                        <div className="p-6">
-                            <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white">{selectedProject.title}</h2>
+                        <div className="p-6 md:p-8">
+                            <h2 className="font-[family-name:var(--font-display)] font-bold text-2xl text-ink mb-4">{selectedProject.title}</h2>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                                <div className="flex items-center text-gray-600 dark:text-gray-300">
-                                    <FaCalendar className="mr-3 text-purple-600 dark:text-purple-400" />
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 pb-6 border-b border-line">
+                                <div className="flex items-center text-ink-dim text-sm">
+                                    <FaCalendar className="mr-3 text-lime" />
                                     <span>{selectedProject.date}</span>
                                 </div>
-                                <div className="flex items-center text-gray-600 dark:text-gray-300">
-                                    <FaUsers className="mr-3 text-purple-600 dark:text-purple-400" />
+                                <div className="flex items-center text-ink-dim text-sm">
+                                    <FaUsers className="mr-3 text-lime" />
                                     <span>{selectedProject.teamSize}</span>
                                 </div>
-                                <div className="flex items-center text-gray-600 dark:text-gray-300">
-                                    <FaCode className="mr-3 text-purple-600 dark:text-purple-400" />
+                                <div className="flex items-center text-ink-dim text-sm">
+                                    <FaCode className="mr-3 text-lime" />
                                     <span>{selectedProject.role}</span>
                                 </div>
                             </div>
 
-                            <div className="mb-6">
-                                <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Project Description</h3>
-                                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{selectedProject.fullDescription}</p>
+                            <div className="mb-8">
+                                <h3 className="text-lg font-medium mb-3 text-ink">Project Description</h3>
+                                <p className="text-ink-dim leading-relaxed">{selectedProject.fullDescription}</p>
                             </div>
-                            <div className="mb-6">
-                                <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">My Task</h3>
-                                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{selectedProject.myTask}</p>
+                            <div className="mb-8">
+                                <h3 className="text-lg font-medium mb-3 text-ink">My Task</h3>
+                                <p className="text-ink-dim leading-relaxed">{selectedProject.myTask}</p>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                 <div>
-                                    <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Key Features</h3>
+                                    <h3 className="text-lg font-medium mb-3 text-ink">Key Features</h3>
                                     <ul className="space-y-2">
                                         {selectedProject.features.map((feature, index) => (
-                                            <li key={index} className="flex items-start text-gray-600 dark:text-gray-300">
-                                                <span className="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <li key={index} className="flex items-start text-ink-dim text-sm">
+                                                <span className="w-1 h-1 bg-lime mt-2 mr-3 flex-shrink-0"></span>
                                                 <span>{feature}</span>
                                             </li>
                                         ))}
@@ -356,12 +319,12 @@ const Projects = () => {
                                 </div>
 
                                 <div>
-                                    <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Technology</h3>
+                                    <h3 className="text-lg font-medium mb-3 text-ink">Technology</h3>
                                     <div className="flex flex-wrap gap-2">
                                         {selectedProject.technologies.map((tech, index) => (
                                             <span
                                                 key={index}
-                                                className="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-100 text-sm rounded-full"
+                                                className="px-2.5 py-1 border border-line text-ink-dim text-xs font-[family-name:var(--font-mono)]"
                                             >
                                                 {tech}
                                             </span>
@@ -370,13 +333,13 @@ const Projects = () => {
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div>
-                                    <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Challenges</h3>
+                                    <h3 className="text-lg font-medium mb-3 text-ink">Challenges</h3>
                                     <ul className="space-y-2">
                                         {selectedProject.challenges.map((challenge, index) => (
-                                            <li key={index} className="flex items-start text-gray-600 dark:text-gray-300">
-                                                <span className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <li key={index} className="flex items-start text-ink-dim text-sm">
+                                                <span className="w-1 h-1 bg-clay mt-2 mr-3 flex-shrink-0"></span>
                                                 <span>{challenge}</span>
                                             </li>
                                         ))}
@@ -384,11 +347,11 @@ const Projects = () => {
                                 </div>
 
                                 <div>
-                                    <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">Solutions</h3>
+                                    <h3 className="text-lg font-medium mb-3 text-ink">Solutions</h3>
                                     <ul className="space-y-2">
                                         {selectedProject.solutions.map((solution, index) => (
-                                            <li key={index} className="flex items-start text-gray-600 dark:text-gray-300">
-                                                <span className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <li key={index} className="flex items-start text-ink-dim text-sm">
+                                                <span className="w-1 h-1 bg-lime mt-2 mr-3 flex-shrink-0"></span>
                                                 <span>{solution}</span>
                                             </li>
                                         ))}

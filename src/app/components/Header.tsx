@@ -2,110 +2,78 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa'
+import { FaBars, FaTimes } from 'react-icons/fa'
 
-interface HeaderProps {
-  darkMode: boolean
-  setDarkMode: (darkMode: boolean) => void
-}
-
-const Header = ({ darkMode, setDarkMode }: HeaderProps) => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     setIsMenuOpen(false)
   }
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
-
   const navItems = [
-    { name: 'Home', id: 'home' },
     { name: 'About', id: 'about' },
+    { name: 'Experience', id: 'experience' },
+    { name: 'Education', id: 'education' },
     { name: 'Projects', id: 'projects' },
     { name: 'Skills', id: 'skills' },
     { name: 'Contact', id: 'contact' },
   ]
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-sm">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex justify-between items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-xl font-bold text-purple-600 dark:text-purple-400"
+    <header className="fixed top-0 left-0 w-full z-50 bg-bg/95 backdrop-blur-sm">
+      <div className="px-6 md:px-10">
+        <div className="flex justify-between items-center h-20">
+          <button
+            onClick={() => scrollToSection('home')}
+            className="font-[family-name:var(--font-display)] font-bold text-lg text-ink"
           >
-            DARS
-          </motion.div>
+            DARS<span className="text-lime">.</span>
+          </button>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {navItems.map((item, index) => (
-              <motion.button
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <button
                 key={item.id}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
                 onClick={() => scrollToSection(item.id)}
-                className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium"
+                className="text-sm font-medium text-ink-dim hover:text-lime transition-colors"
               >
                 {item.name}
-              </motion.button>
+              </button>
             ))}
           </nav>
 
-          <div className="flex items-center space-x-4">
-            {/* Dark Mode Toggle */}
-            <motion.button
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? <FaSun /> : <FaMoon />}
-            </motion.button>
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="hidden md:block px-5 py-2.5 bg-lime text-bg font-[family-name:var(--font-display)] font-semibold text-sm hover:bg-ink transition-colors"
+          >
+            Let&apos;s talk
+          </button>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <FaTimes /> : <FaBars />}
-            </button>
-          </div>
+          <button
+            className="md:hidden text-ink text-xl"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <motion.nav
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden mt-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4"
-          >
-            <div className="flex flex-col space-y-4">
+          <nav className="md:hidden pb-6">
+            <div className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors font-medium py-2"
+                  className="text-left py-3 text-ink-dim hover:text-lime transition-colors border-t border-line"
                 >
                   {item.name}
                 </button>
               ))}
             </div>
-          </motion.nav>
+          </nav>
         )}
       </div>
     </header>

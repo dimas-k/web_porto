@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const displayFont = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bodyFont = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
+const monoFont = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
 });
 
 const siteUrl = "https://my-portofolio-five-black.vercel.app";
@@ -21,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s | Dimas Arya Ramadhan Setiawan",
   },
   description:
-    "Portfolio resmi Dimas Arya Ramadhan Setiawan, Full Stack Developer & Machine Learning Enthusiast. Lihat proyek, skill, dan pengalaman di bidang web development, AI, dan deep learning.",
+    "Portfolio Dimas Arya Ramadhan Setiawan, lulusan D4 Rekayasa Perangkat Lunak Politeknik Negeri Indramayu, Software Engineer & ML/AI Engineer. Lihat proyek, skill, pengalaman, dan riset deep learning di bidang web development dan AI.",
   keywords: [
     "Dimas Arya Ramadhan Setiawan",
     "Dimas Arya",
@@ -29,6 +37,37 @@ export const metadata: Metadata = {
     "Full Stack Developer",
     "Machine Learning Enthusiast",
     "Web Developer Indonesia",
+    "AI Researcher Indonesia",
+    "Deep Learning Researcher Indonesia",
+    "Next.js Developer",
+    "React Developer",
+    "Flutter Developer",
+    "Tailwind CSS Developer",
+    "Laravel Developer",
+    "FastAPI Developer",
+    "Node.js Developer",
+    "PHP Developer",
+    "Python Developer",
+    "PostgreSQL Developer",
+    "MySQL Developer",
+    "Supabase Developer",
+    "TensorFlow Developer",
+    "PyTorch Developer",
+    "NLP Developer",
+    "Applied LLMs Developer",
+    "Politeknik Negeri Indramayu Alumni",
+    "Indramayu Software Engineer",
+    "Indramayu ML/AI Engineer",
+    "Indramayu Web Developer",
+    "Indramayu AI Researcher",
+    "Indramayu Deep Learning Researcher",
+    "Software Engineer Indonesia",
+    "ML/AI Engineer Indonesia",
+    "Web Developer Indonesia",
+    "AI Researcher Indonesia",
+    "Deep Learning Researcher Indonesia",
+    "Politeknik Negeri Indramayu",
+    
   ],
   authors: [{ name: "Dimas Arya Ramadhan Setiawan", url: siteUrl }],
   creator: "Dimas Arya Ramadhan Setiawan",
@@ -42,7 +81,7 @@ export const metadata: Metadata = {
     siteName: "Dimas Arya Ramadhan Setiawan's Portfolio",
     title: "Dimas Arya Ramadhan Setiawan | Portfolio",
     description:
-      "Full Stack Developer & Machine Learning Enthusiast. Lihat proyek, skill, dan pengalaman Dimas Arya Ramadhan Setiawan.",
+      "Full Stack Developer & ML/AI Engineer. Lihat proyek, skill, dan pengalaman Dimas Arya Ramadhan Setiawan.",
     images: [
       {
         url: "/images/gambar-dimas.jpg",
@@ -56,7 +95,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Dimas Arya Ramadhan Setiawan | Portfolio",
     description:
-      "Full Stack Developer & Machine Learning Enthusiast. Lihat proyek, skill, dan pengalaman Dimas Arya Ramadhan Setiawan.",
+      "Full Stack Developer & ML/AI Engineer. Lihat proyek, skill, dan pengalaman Dimas Arya Ramadhan Setiawan.",
     images: ["/images/gambar-dimas.jpg"],
   },
   robots: {
@@ -82,7 +121,7 @@ export default function RootLayout({
     name: "Dimas Arya Ramadhan Setiawan",
     url: siteUrl,
     image: `${siteUrl}/images/gambar-dimas.jpg`,
-    jobTitle: "Full Stack Developer & Machine Learning Enthusiast",
+    jobTitle: "Full Stack Developer & ML/AI Engineer",
     sameAs: [
       "https://github.com/dimas-k",
       "https://www.linkedin.com/in/dimas-arya-ramadhan-setiawan-4544362aa/",
@@ -99,7 +138,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable} antialiased`}
       >
         {children}
       </body>
