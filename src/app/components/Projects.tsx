@@ -31,7 +31,7 @@ const Projects = () => {
             image: '/projects/siki.png',
             technologies: ['Laravel', 'Javascript', 'Ajax', 'Bootstrap', 'PHP', 'MySql', 'Jquery', 'Chart.js'],
             fullDescription: "An application that manages the intellectual property of Politeknik Negeri Indramayu, whether it is from students or Politeknik Negeri Indramayu community. This includes patents, copyrights, and industrial designs. ",
-            myTask: "My task in this project is to create a dynamic frontend using Bootstrap and a backend using PHP and Laravel. In the system, I handle the validation of intellectual property forms, create login authentication, and build the entire admin panel. I also design and implement the database along with its relational structure to support the application's functionality. Additionally, I manage supporting project files and documentation to ensure the development process runs smoothly and is well-documented.",
+            myTask: "As Technical Lead, I was responsible for tech stack selection, task delegation, and system architecture design for the team (Sep 2023 - Feb 2025). I built a dynamic frontend using Bootstrap and a backend using PHP and Laravel, handled validation of intellectual property forms, login authentication, and the entire admin panel. I also designed and implemented the database along with its relational structure, and conducted code reviews to maintain quality across the team. After the team phase ended, I continued as the sole developer and maintainer from January to June 2026, handling bug fixes and feature updates independently.",
             features: [
                 'Intellectual property management (patents, copyrights, industrial designs) with full CRUD',
                 'Visualization of application progress through charts, tables, and text',
@@ -40,9 +40,9 @@ const Projects = () => {
                 'Responsive design across all devices',
                 'Real-time admin dashboard for monitoring and management'
             ],
-            date: 'Sep 2023 - Present',
-            role: 'Full Stack Developer & Project Manager',
-            teamSize: '4 people (2 developers, 2 designers, 1 PM)',
+            date: 'Sep 2023 - Feb 2025 (Team) · Jan - Jun 2026 (Solo)',
+            role: 'Technical Lead & Fullstack Developer',
+            teamSize: '4 people (2 developers, 2 designers, 1 PM), then solo from Jan 2026',
             challenges: [
                 'Managing complex relational data for multiple IP types',
                 'Role-based access control for different user types',
@@ -60,7 +60,7 @@ const Projects = () => {
             image: '/projects/dbpro.png',
             technologies: ['Laravel', 'Bootstrap', 'Javascript', 'PHP', 'Ajax', 'ApexCharts', 'MySql', 'Jquery'],
             fullDescription: 'Innovation and research product management application at Politeknik Negeri Indramayu. This application makes it easier for lecturers to manage innovation and research products that have been created. It also makes it easier for the community or external parties to learn about and become familiar with innovation products at Politeknik Negeri Indramayu.',
-            myTask: "I work on both the front-end and back-end development. I handle the front-end for the admin and landing pages, while on the back-end I am responsible for almost all of the core functionality. I also use AJAX for all form validations and assist my teammates in creating APIs. Additionally, I design and implement the database along with its relational structure to support the system's logic. I also manage the project's supporting files and documentation to ensure smooth and organized development.",
+            myTask: "As Technical Lead, I directed the team's tech stack selection and task delegation (Sep 2024 - Feb 2025). I worked on both front-end and back-end development, handling the front-end for the admin and landing pages, while on the back-end I was responsible for almost all of the core functionality. I used AJAX for all form validations and built RESTful APIs consumed by a companion mobile app. I also designed the database and its relational structure. After the team phase ended, I continued the system's development solo from January to June 2026, alongside maintaining the Intellectual Property System.",
             features: [
                 'Real-time dashboard for innovation and research products',
                 'Categorization by field of expertise',
@@ -70,9 +70,9 @@ const Projects = () => {
                 'Admin validation before publishing',
                 'Export data to Excel for reporting'
             ],
-            date: 'Okt 2024 - Present',
-            role: 'Full Stack Developer',
-            teamSize: '3 People (3 developers, 1 PM)',
+            date: 'Sep 2024 - Feb 2025 (Team) · Jan - Jun 2026 (Solo)',
+            role: 'Technical Lead & Fullstack Developer',
+            teamSize: '3 People (3 developers, 1 PM), then solo from Jan 2026',
             challenges: [
                 'Real-time data synchronization across modules',
                 'Building efficient search and filter for large datasets',
@@ -192,7 +192,7 @@ const Projects = () => {
                 'End-to-end pipeline: image capture → IoT fusion → classification → recommendation',
                 'Comparative analysis of model performance across 4 rice disease datasets'
             ],
-            date: 'Feb 2026 - Jul 2026',
+            date: 'Feb 2026 - Aug 2026',
             role: 'Researcher & Fullstack Developer',
             teamSize: '1 Person (Thesis Research)',
             challenges: [
