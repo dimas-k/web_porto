@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+<<<<<<< Updated upstream
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +24,109 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+=======
+  --bg: #f3f5f8;
+  --surface: rgb(255 255 255 / 0.72);
+  --edge: rgb(15 23 42 / 0.09);
+  --fg: #0b1220;
+  --muted: #566074;
+  --a1: #059669;
+  --a2: #0284c7;
+  --a3: #d97706;
+  --blob-opacity: 0.35;
+}
+
+.dark {
+  --bg: #05070d;
+  --surface: rgb(255 255 255 / 0.04);
+  --edge: rgb(255 255 255 / 0.09);
+  --fg: #eef2f7;
+  --muted: #8b95a7;
+  --a1: #34d399;
+  --a2: #38bdf8;
+  --a3: #fbbf24;
+  --blob-opacity: 0.5;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-edge: var(--edge);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-a1: var(--a1);
+  --color-a2: var(--a2);
+  --color-a3: var(--a3);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+html { scroll-behavior: smooth; background: var(--bg); }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .4s ease, color .4s ease;
+}
+
+::selection { background: color-mix(in srgb, var(--a1) 40%, transparent); }
+
+/* ---------- ambient background ---------- */
+.bg-stage { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.bg-stage::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--edge) 1px, transparent 1px),
+    linear-gradient(90deg, var(--edge) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, #000 20%, transparent 75%);
+}
+.blob { position: absolute; border-radius: 9999px; filter: blur(110px); opacity: var(--blob-opacity); }
+.blob-1 { width: 42rem; height: 42rem; left: -10rem; top: -12rem; background: var(--a1); animation: drift 22s ease-in-out infinite alternate; }
+.blob-2 { width: 36rem; height: 36rem; right: -8rem; top: 10rem; background: var(--a2); animation: drift 26s ease-in-out infinite alternate-reverse; }
+.blob-3 { width: 28rem; height: 28rem; left: 35%; bottom: -14rem; background: var(--a3); opacity: calc(var(--blob-opacity) * 0.45); animation: drift 30s ease-in-out infinite alternate; }
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(6rem, 4rem, 0) scale(1.15); }
+}
+
+/* ---------- glass tile with cursor spotlight ---------- */
+.tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  transition: border-color .3s ease;
+}
+.tile::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; z-index: 1;
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--a1) 20%, transparent), transparent 65%);
+  transition: opacity .35s ease;
+}
+.tile:hover::before { opacity: 1; }
+.tile:hover { border-color: color-mix(in srgb, var(--a1) 45%, var(--edge)); }
+
+.text-grad {
+  background-image: linear-gradient(100deg, var(--a1), var(--a2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.bg-grad { background-image: linear-gradient(100deg, var(--a1), var(--a2)); }
+
+.mono { font-family: var(--font-mono), ui-monospace, monospace; }
+
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 28s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .blob, .marquee-track { animation: none; }
+>>>>>>> Stashed changes
 }

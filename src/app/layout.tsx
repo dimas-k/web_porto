@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+<<<<<<< Updated upstream
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -9,6 +10,18 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+=======
+import { Manrope, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const sans = Manrope({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
+
+const mono = Geist_Mono({
+  variable: "--font-mono",
+>>>>>>> Stashed changes
   subsets: ["latin"],
 });
 
@@ -32,9 +45,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Dimas Arya Ramadhan Setiawan", url: siteUrl }],
   creator: "Dimas Arya Ramadhan Setiawan",
-  alternates: {
-    canonical: siteUrl,
-  },
+  alternates: { canonical: siteUrl },
   openGraph: {
     type: "website",
     locale: "id_ID",
@@ -44,12 +55,7 @@ export const metadata: Metadata = {
     description:
       "Full Stack Developer & Machine Learning Enthusiast. Lihat proyek, skill, dan pengalaman Dimas Arya Ramadhan Setiawan.",
     images: [
-      {
-        url: "/images/gambar-dimas.jpg",
-        width: 800,
-        height: 800,
-        alt: "Dimas Arya Ramadhan Setiawan",
-      },
+      { url: "/images/gambar-dimas.jpg", width: 800, height: 800, alt: "Dimas Arya Ramadhan Setiawan" },
     ],
   },
   twitter: {
@@ -62,20 +68,20 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+// Set tema sebelum paint supaya tidak flash
+const themeScript = `
+try {
+  var s = localStorage.getItem('theme');
+  var d = s ? s === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (d) document.documentElement.classList.add('dark');
+} catch (e) {}
+`;
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -91,16 +97,23 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
+<<<<<<< Updated upstream
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+=======
+      <body className={`${sans.variable} ${mono.variable} antialiased`}>
+        <div className="bg-stage" aria-hidden>
+          <span className="blob blob-1" />
+          <span className="blob blob-2" />
+          <span className="blob blob-3" />
+        </div>
+>>>>>>> Stashed changes
         {children}
       </body>
     </html>
