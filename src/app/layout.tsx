@@ -1,16 +1,4 @@
 import type { Metadata } from "next";
-<<<<<<< Updated upstream
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-=======
 import { Manrope, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -21,7 +9,6 @@ const sans = Manrope({
 
 const mono = Geist_Mono({
   variable: "--font-mono",
->>>>>>> Stashed changes
   subsets: ["latin"],
 });
 
@@ -102,18 +89,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-<<<<<<< Updated upstream
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-=======
       <body className={`${sans.variable} ${mono.variable} antialiased`}>
         <div className="bg-stage" aria-hidden>
           <span className="blob blob-1" />
           <span className="blob blob-2" />
           <span className="blob blob-3" />
         </div>
->>>>>>> Stashed changes
         {children}
       </body>
     </html>
