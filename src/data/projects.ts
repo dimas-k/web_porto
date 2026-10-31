@@ -25,11 +25,11 @@ export interface ProjectMeta {
 
 // Judul singkat + kategori (urutan sama dengan `projects`)
 export const projectMeta: ProjectMeta[] = [
-  { short: 'SIKI Polindra', category: 'Web System', year: '2023 —', tags: ['Web'] },
-  { short: 'Dashboard Produk Inovasi', category: 'Web Dashboard', year: '2024 —', tags: ['Web'] },
+  { short: 'SIKI Polindra', category: 'Web System', year: '2023 – 2026', tags: ['Web'] },
+  { short: 'Dashboard Produk Inovasi', category: 'Web Dashboard', year: '2024 – 2026', tags: ['Web'] },
   { short: 'MyBTP — Hibah Eksternal', category: 'Internship Module', year: '2025', tags: ['Web'] },
   { short: 'Rasa Kata', category: 'NLP · Deep Learning', year: '2025', tags: ['AI/ML', 'Web'] },
-  { short: 'Byanice', category: 'Agentic AI Assistant', year: '2026 —', tags: ['AI/ML', 'Mobile'], focus: 'top' },
+  { short: 'Byanice', category: 'Agentic AI Assistant', year: '2025 – 2026', tags: ['AI/ML', 'Mobile'], focus: 'top' },
   { short: 'Rice Disease Classifier', category: 'Thesis · DL · IoT', year: '2026', tags: ['AI/ML', 'Mobile'] },
   { short: 'Cuplik News Portal', category: 'News Portal · CMS', year: '2026', tags: ['Web'] },
 ]
@@ -50,8 +50,8 @@ export const projects: Project[] = [
             'Responsive design across all devices',
             'Real-time admin dashboard for monitoring and management'
         ],
-        date: 'Sep 2023 - Present',
-        role: 'Full Stack Developer & Project Manager',
+        date: 'Sep 2023 - Feb 2025 (team) · Jan 2026 - Jun 2026 (solo)',
+        role: 'Technical Lead & Fullstack Developer',
         teamSize: '4 people (2 developers, 2 designers, 1 PM)',
         challenges: [
             'Managing complex relational data for multiple IP types',
@@ -80,8 +80,8 @@ export const projects: Project[] = [
             'Admin validation before publishing',
             'Export data to Excel for reporting'
         ],
-        date: 'Okt 2024 - Present',
-        role: 'Full Stack Developer',
+        date: 'Sep 2024 - Feb 2025 (team) · Jan 2026 - Jun 2026 (solo)',
+        role: 'Technical Lead & Fullstack Developer',
         teamSize: '3 People (3 developers, 1 PM)',
         challenges: [
             'Real-time data synchronization across modules',
@@ -172,7 +172,7 @@ export const projects: Project[] = [
             'Supabase authentication and user preference management',
             'FastAPI backend for efficient AI inference and tool orchestration'
         ],
-        date: 'Mar 2026 - Present',
+        date: 'Jul 2025 - Sep 2026',
         role: 'Fullstack Developer (Flutter + FastAPI)',
         teamSize: '1 Person',
         challenges: [
@@ -203,7 +203,7 @@ export const projects: Project[] = [
             'Comparative analysis of model performance across 4 rice disease datasets'
             
         ],
-        date: 'Feb 2026 - Jul 2026',
+        date: 'Feb 2026 - Aug 2026',
         role: 'Researcher & Fullstack Developer',
         teamSize: '1 Person (Thesis Research)',
         challenges: [

@@ -117,7 +117,7 @@ export const experiences: Experience[] = [
       'Led technical direction for the team, including tech stack selection and task delegation (Sep 2024 – Feb 2025).',
       'Developed the Laravel backend and MySQL database, implemented AJAX-based form validation to reduce submission errors, and built RESTful APIs consumed by a companion mobile app.',
       'Participated in feature planning, testing, bug fixing, and continuous improvements with the project team.',
-      'Registered as a computer program copyright (Surat Pencatatan Ciptaan No. 000829823, 20 Dec 2024), co-created with four other creators and held by POLINDRA.',
+      'Led the team that built the system, which was registered as a computer program copyright (Surat Pencatatan Ciptaan No. 000829823, 20 Dec 2024) held by POLINDRA.',
       'Continued solo development of the system (Jan 2026 – Jun 2026), alongside maintaining the Intellectual Property System.',
     ],
     tech: ['Laravel', 'MySQL', 'AJAX', 'REST API', 'Copyright'],
