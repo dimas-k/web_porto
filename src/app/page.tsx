@@ -5,6 +5,7 @@ import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Certifications from './components/Certifications'
+import IntellectualProperty from './components/IntellectualProperty'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -18,6 +19,7 @@ export default function Home() {
         <Projects />
         <Skills />
         <Certifications />
+        <IntellectualProperty />
         <Contact />
       </main>
       <Footer />
