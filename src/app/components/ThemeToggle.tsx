@@ -21,7 +21,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label="Toggle theme"
-      className="grid h-11 w-11 place-items-center rounded-2xl text-muted transition-all hover:bg-fg/10 hover:text-fg"
+      className="grid h-9 w-9 place-items-center rounded-full sm:h-10 sm:w-10 text-muted transition-all hover:bg-fg/10 hover:text-fg"
     >
       {dark ? <FiSun size={18} /> : <FiMoon size={18} />}
     </button>

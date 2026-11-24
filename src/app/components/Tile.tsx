@@ -21,6 +21,7 @@ export default function Tile({ children, className = '', spotlight = true, ...re
       onMouseMove={onMove}
       initial={{ opacity: 0, y: 24, scale: 0.98 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      whileHover={{ y: -3 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.7, ease: [0.2, 0.7, 0.2, 1] }}
       className={`tile ${className}`}

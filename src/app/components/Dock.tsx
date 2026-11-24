@@ -1,68 +1,54 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { FiHome, FiUser, FiBriefcase, FiLayers, FiCpu, FiAward, FiMail } from 'react-icons/fi'
 import ThemeToggle from './ThemeToggle'
+import { pages } from './nav'
 
-const items = [
-  { id: 'home', label: 'Home', icon: FiHome },
-  { id: 'about', label: 'About', icon: FiUser },
-  { id: 'experience', label: 'Experience', icon: FiBriefcase },
-  { id: 'projects', label: 'Work', icon: FiLayers },
-  { id: 'skills', label: 'Stack', icon: FiCpu },
-  { id: 'certifications', label: 'Certificates', icon: FiAward },
-  { id: 'contact', label: 'Contact', icon: FiMail },
-]
+const track = (e: React.MouseEvent<HTMLElement>) => {
+  const el = e.currentTarget
+  const r = el.getBoundingClientRect()
+  el.style.setProperty('--mx', `${e.clientX - r.left}px`)
+  el.style.setProperty('--my', `${e.clientY - r.top}px`)
+}
 
 export default function Dock() {
-  const [active, setActive] = useState('home')
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-      { rootMargin: '-45% 0px -50% 0px' }
-    )
-    items.forEach(({ id }) => {
-      const el = document.getElementById(id)
-      if (el) obs.observe(el)
-    })
-    return () => obs.disconnect()
-  }, [])
+  const pathname = usePathname()
 
   return (
     <motion.nav
-      initial={{ y: 80, opacity: 0 }}
+      initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.6, duration: 0.7, ease: [0.2, 0.7, 0.2, 1] }}
-      className="fixed bottom-5 left-1/2 z-50 -translate-x-1/2"
+      transition={{ type: 'spring', stiffness: 160, damping: 16, delay: 0.2 }}
+      className="fixed left-1/2 top-3 z-50 -translate-x-1/2 sm:top-4"
       aria-label="Primary"
     >
-      <div className="flex items-center gap-0.5 rounded-3xl sm:gap-1 border border-edge bg-bg/70 p-1.5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-        {items.map(({ id, label, icon: Icon }) => {
-          const on = active === id
+      <div onMouseMove={track} className="glow flex items-center rounded-full border border-edge bg-bg/70 p-1 shadow-xl shadow-black/10 backdrop-blur-2xl sm:gap-0.5 sm:p-1.5">
+        {pages.map(({ href, label, icon: Icon }) => {
+          const on = pathname === href
           return (
-            <button
-              key={id}
-              onClick={() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })}
+            <Link
+              key={href}
+              href={href}
               aria-label={label}
-              className="group relative grid h-10 w-10 place-items-center rounded-2xl sm:h-11 sm:w-11"
+              aria-current={on ? 'page' : undefined}
+              onMouseMove={track}
+              className="glow glow-sm group relative flex h-9 items-center justify-center rounded-full px-2.5 md:h-10 md:px-4"
             >
               {on && (
                 <motion.span
-                  layoutId="dock-active"
-                  className="absolute inset-0 rounded-2xl bg-grad"
-                  transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                  layoutId="nav-active"
+                  className="absolute inset-0 rounded-full bg-grad"
+                  transition={{ type: 'spring', stiffness: 380, damping: 26 }}
                 />
               )}
-              <Icon size={18} className={`relative transition-colors ${on ? 'text-black' : 'text-muted group-hover:text-fg'}`} />
-              <span className="mono pointer-events-none absolute -top-9 rounded-lg border border-edge bg-bg px-2 py-1 text-[0.65rem] opacity-0 transition-all group-hover:-top-10 group-hover:opacity-100">
-                {label}
-              </span>
-            </button>
+              <Icon size={17} className={`relative transition-transform group-hover:scale-110 md:hidden ${on ? 'text-black' : 'text-muted group-hover:text-fg'}`} />
+              <span className={`relative hidden text-sm font-semibold transition-colors md:inline ${on ? 'text-black' : 'text-muted group-hover:text-fg'}`}>{label}</span>
+            </Link>
           )
         })}
-        <span className="mx-1 h-6 w-px bg-edge" />
+        <span className="mx-0.5 h-5 w-px bg-edge sm:mx-1" />
         <ThemeToggle />
       </div>
     </motion.nav>

@@ -3,21 +3,27 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
-import { FiArrowUpRight, FiCalendar, FiUsers, FiUser, FiX } from 'react-icons/fi'
+import { FiArrowUpRight, FiCalendar, FiChevronLeft, FiChevronRight, FiUsers, FiUser, FiX } from 'react-icons/fi'
 import { projects, projectMeta, type Tag } from '@/data/projects'
-import Eyebrow from './Eyebrow'
-import Reveal from './Reveal'
+import Tile from './Tile'
+import Page, { PageTitle } from './Page'
 
 const filters: ('All' | Tag)[] = ['All', 'Web', 'AI/ML', 'Mobile']
 
 export default function Projects() {
   const [filter, setFilter] = useState<'All' | Tag>('All')
+  const [sel, setSel] = useState(0)
   const [open, setOpen] = useState<number | null>(null)
 
   const visible = projects
     .map((p, i) => ({ p, m: projectMeta[i], i }))
     .filter(({ m }) => filter === 'All' || m.tags.includes(filter))
 
+  const at = Math.min(sel, visible.length - 1)
+  const { p, m, i: curIndex } = visible[at]
+  const go = (d: number) => setSel((at + d + visible.length) % visible.length)
+
+  // modal: lock body, Esc to close
   useEffect(() => {
     if (open === null) return
     const prev = document.body.style.overflow
@@ -30,92 +36,162 @@ export default function Projects() {
     }
   }, [open])
 
-  return (
-    <section id="projects" className="py-24">
-      <Reveal className="mb-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-        <div>
-          <Eyebrow>Selected work</Eyebrow>
-          <h2 className="mt-5 text-[clamp(2rem,4.4vw,3.6rem)] font-extrabold leading-[1.02] tracking-[-0.035em]">
-            Projects that <span className="text-grad">ship</span>.
-          </h2>
-        </div>
+  // arrow keys switch project while the modal is closed
+  useEffect(() => {
+    if (open !== null) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') go(1)
+      if (e.key === 'ArrowLeft') go(-1)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  })
 
-        <div className="flex w-fit gap-1 rounded-2xl border border-edge bg-surface p-1 backdrop-blur">
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setFilter(f)}
-              className="relative rounded-xl px-4 py-2 text-sm font-semibold"
+  return (
+    <Page>
+      <PageTitle
+        eyebrow="Selected work"
+        aside={
+          <div className="flex w-fit gap-1 rounded-2xl border border-edge bg-surface p-1 backdrop-blur">
+            {filters.map((f) => (
+              <button
+                key={f}
+                onClick={() => {
+                  setFilter(f)
+                  setSel(0)
+                }}
+                className="relative rounded-xl px-4 py-1.5 text-sm font-semibold"
+              >
+                {filter === f && (
+                  <motion.span layoutId="filter-pill" className="bg-grad absolute inset-0 rounded-xl" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />
+                )}
+                <span className={`relative ${filter === f ? 'text-black' : 'text-muted'}`}>{f}</span>
+              </button>
+            ))}
+          </div>
+        }
+      >
+        Projects that <span className="text-grad">ship</span>.
+      </PageTitle>
+
+      <div className="mt-4 grid flex-1 gap-4 lg:min-h-0 lg:grid-cols-12 lg:grid-rows-[minmax(0,1fr)_auto]">
+        {/* big preview */}
+        <Tile className="group relative aspect-[16/10] lg:col-span-7 lg:aspect-auto" spotlight={false}>
+          <AnimatePresence mode="popLayout">
+            <motion.button
+              key={p.title}
+              initial={{ opacity: 0, scale: 1.03 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              onClick={() => setOpen(curIndex)}
+              aria-label={`Open details: ${m.short}`}
+              className="absolute inset-0 block"
             >
-              {filter === f && (
-                <motion.span layoutId="filter-pill" className="bg-grad absolute inset-0 rounded-xl" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />
-              )}
-              <span className={`relative ${filter === f ? 'text-black' : 'text-muted'}`}>{f}</span>
+              <Image
+                src={p.image}
+                alt={p.title}
+                fill
+                priority
+                sizes="(min-width: 1024px) 720px, 100vw"
+                className="object-cover"
+                style={{ objectPosition: m.focus ?? 'top' }}
+              />
+              <span className="absolute inset-0 bg-gradient-to-t from-bg/50 via-transparent to-transparent" />
+            </motion.button>
+          </AnimatePresence>
+
+          <span className="mono absolute left-4 top-4 z-[2] rounded-full bg-bg/70 px-3 py-1 text-[0.65rem] backdrop-blur">
+            {String(at + 1).padStart(2, '0')} / {String(visible.length).padStart(2, '0')}
+          </span>
+
+          {visible.length > 1 && (
+            <div className="absolute bottom-4 right-4 z-[2] flex gap-2">
+              {[
+                { d: -1, label: 'Previous project', Icon: FiChevronLeft },
+                { d: 1, label: 'Next project', Icon: FiChevronRight },
+              ].map(({ d, label, Icon }) => (
+                <button
+                  key={label}
+                  onClick={() => go(d)}
+                  aria-label={label}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-edge bg-bg/80 backdrop-blur transition-colors hover:border-a1"
+                >
+                  <Icon />
+                </button>
+              ))}
+            </div>
+          )}
+        </Tile>
+
+        {/* info */}
+        <Tile className="flex flex-col lg:col-span-5" spotlight>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={p.title}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="scroll-soft relative z-[2] flex flex-1 flex-col overflow-y-auto p-5 sm:p-7"
+            >
+              <div className="mono flex items-center justify-between text-[0.7rem]">
+                <span className="text-a1">{m.category}</span>
+                <span className="text-muted">{m.year}</span>
+              </div>
+              <h2 className="mt-3 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">{m.short}</h2>
+              <p className="mt-4 line-clamp-5 text-sm leading-relaxed text-muted">{p.fullDescription}</p>
+
+              <p className="mono mt-4 text-xs text-muted">
+                <FiUser className="mr-1.5 inline text-a1" />
+                {p.role}
+              </p>
+
+              <div className="mt-4 flex flex-wrap gap-1.5">
+                {p.technologies.slice(0, 6).map((t) => (
+                  <span key={t} className="mono rounded-full border border-edge px-2.5 py-1 text-[0.68rem] text-muted">
+                    {t}
+                  </span>
+                ))}
+                {p.technologies.length > 6 && <span className="mono px-1 py-1 text-[0.68rem] text-muted">+{p.technologies.length - 6}</span>}
+              </div>
+
+              <button
+                onClick={() => setOpen(curIndex)}
+                className="bg-grad group mt-auto inline-flex w-fit items-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold text-black transition-transform hover:scale-[1.03]"
+              >
+                View details
+                <FiArrowUpRight className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </button>
+            </motion.div>
+          </AnimatePresence>
+        </Tile>
+
+        {/* thumbnails */}
+        <div className="scroll-soft -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 lg:col-span-12">
+          {visible.map(({ p: q, m: n }, k) => (
+            <button
+              key={q.title}
+              onClick={() => setSel(k)}
+              aria-label={n.short}
+              aria-pressed={k === at}
+              className={`group relative h-16 w-28 shrink-0 overflow-hidden rounded-xl border transition-all sm:h-[4.5rem] sm:w-36 ${
+                k === at ? 'border-a1 ring-2 ring-a1/30' : 'border-edge opacity-60 hover:opacity-100'
+              }`}
+            >
+              <Image src={q.image} alt="" fill sizes="144px" className="object-cover" style={{ objectPosition: n.focus ?? 'top' }} />
+              <span className="mono absolute inset-x-0 bottom-0 truncate bg-gradient-to-t from-black/80 to-transparent px-2 pb-1 pt-4 text-left text-[0.6rem] text-white">
+                {n.short}
+              </span>
             </button>
           ))}
         </div>
-      </Reveal>
-
-      <motion.div layout className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
-          {visible.map(({ p, m, i }, idx) => (
-            <motion.button
-              layout
-              key={p.title}
-              initial={{ opacity: 0, scale: 0.94 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.94 }}
-              transition={{ duration: 0.4, delay: idx * 0.04 }}
-              onClick={() => setOpen(i)}
-              onMouseMove={(e) => {
-                const r = e.currentTarget.getBoundingClientRect()
-                e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
-                e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
-              }}
-              className="tile group flex flex-col text-left"
-            >
-              <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-edge">
-                <Image
-                  src={p.image}
-                  alt={p.title}
-                  fill
-                  sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  style={{ objectPosition: m.focus ?? 'center' }}
-                />
-                <div className="absolute inset-0 z-[2] bg-gradient-to-t from-bg/60 to-transparent" />
-                <span className="mono absolute left-4 top-4 z-[2] rounded-full bg-bg/70 px-3 py-1 text-[0.65rem] backdrop-blur">
-                  {m.year}
-                </span>
-                <span className="absolute right-4 top-4 z-[2] grid h-9 w-9 place-items-center rounded-full bg-grad text-black opacity-0 transition-all duration-300 group-hover:opacity-100">
-                  <FiArrowUpRight />
-                </span>
-              </div>
-
-              <div className="flex flex-1 flex-col p-6">
-                <p className="mono text-[0.68rem] text-a1">{m.category}</p>
-                <h3 className="mt-2 text-xl font-bold leading-tight tracking-tight">{m.short}</h3>
-                <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted">{p.description}</p>
-                <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
-                  {p.technologies.slice(0, 3).map((t) => (
-                    <span key={t} className="mono rounded-full border border-edge px-2.5 py-1 text-[0.65rem] text-muted">
-                      {t}
-                    </span>
-                  ))}
-                  {p.technologies.length > 3 && (
-                    <span className="mono px-1 py-1 text-[0.65rem] text-muted">+{p.technologies.length - 3}</span>
-                  )}
-                </div>
-              </div>
-            </motion.button>
-          ))}
-        </AnimatePresence>
-      </motion.div>
+      </div>
 
       <AnimatePresence>
         {open !== null && <Modal key="modal" i={open} onClose={() => setOpen(null)} />}
       </AnimatePresence>
-    </section>
+    </Page>
   )
 }
 

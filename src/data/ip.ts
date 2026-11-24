@@ -36,7 +36,7 @@ export const ipItems: IPItem[] = [
       { k: 'Legal basis', v: 'Law No. 28 of 2014 on Copyright' },
     ],
     myRole: 'Technical Lead & Fullstack Developer',
-    relatedHref: '#experience',
+    relatedHref: '/experience',
     tags: ['Laravel', 'MySQL', 'REST API', 'Copyright'],
   },
   {

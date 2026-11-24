@@ -1,0 +1,9 @@
+# Query: whoami
+# ContextLines: 1
+
+1 result - 1 file
+
+src\app\components\Hero.tsx:
+  19          >
+  20:           <span className="text-lime">$</span> whoami —{' '}
+  21            <span className="text-ink">Politeknik</span>

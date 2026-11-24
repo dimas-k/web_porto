@@ -37,7 +37,8 @@
   --font-mono: var(--font-mono);
 }
 
-html { scroll-behavior: smooth; background: var(--bg); }
+html, body { height: 100%; overflow: hidden; }
+html { background: var(--bg); }
 
 body {
   background: var(--bg);
@@ -73,7 +74,7 @@ body {
 .tile {
   position: relative;
   overflow: hidden;
-  border-radius: 1.75rem;
+  border-radius: 2.25rem;
   background: var(--surface);
   border: 1px solid var(--edge);
   -webkit-backdrop-filter: blur(18px);
@@ -101,7 +102,34 @@ body {
 .marquee-track { animation: marquee 28s linear infinite; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 
+/* thin scrollbar, only visible when a page really can't fit the screen */
+.scroll-soft { scrollbar-width: thin; scrollbar-color: var(--edge) transparent; }
+.scroll-soft::-webkit-scrollbar { width: 6px; }
+.scroll-soft::-webkit-scrollbar-thumb { background: var(--edge); border-radius: 9999px; }
+
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   .blob, .marquee-track { animation: none; }
 }
+
+/* organic, slightly uneven corners so cards feel hand-shaped, not boxy */
+.tile:nth-of-type(odd) { border-radius: 2.75rem 1.1rem 2.75rem 1.1rem; }
+.tile:nth-of-type(even) { border-radius: 1.1rem 2.75rem 1.1rem 2.75rem; }
+@media (max-width: 640px) {
+  .tile:nth-of-type(odd), .tile:nth-of-type(even) { border-radius: 1.75rem; }
+}
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-4px) rotate(1deg); } }
+.bob { animation: bob 5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .bob { animation: none; } }
+
+/* cursor-following neon glow, same feel as the tiles (used by the navbar) */
+.glow { position: relative; overflow: hidden; transition: border-color .3s ease; }
+.glow::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; border-radius: inherit;
+  background: radial-gradient(var(--glow-r, 260px) circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--a1) 30%, transparent), transparent 65%);
+  transition: opacity .3s ease;
+}
+.glow:hover::before { opacity: 1; }
+.glow:hover { border-color: color-mix(in srgb, var(--a1) 45%, var(--edge)); }
+.glow-sm { --glow-r: 90px; }
+.glow-sm:hover { border-color: transparent; }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Dock from "./components/Dock";
 
 const sans = Manrope({
   variable: "--font-sans",
@@ -95,7 +96,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <span className="blob blob-2" />
           <span className="blob blob-3" />
         </div>
-        {children}
+        <div className="flex h-dvh flex-col">
+          <main className="relative min-h-0 flex-1">
+            <div className="scroll-soft absolute inset-0 overflow-y-auto">
+              <div className="mx-auto flex min-h-full w-full max-w-[1280px] flex-col px-4 pb-5 pt-[4.75rem] sm:px-6 sm:pt-[5.25rem]">{children}</div>
+            </div>
+          </main>
+        </div>
+        <Dock />
       </body>
     </html>
   );
